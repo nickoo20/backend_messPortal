@@ -1,5 +1,5 @@
 import express from 'express' ;
-import { authMiddleWare } from '../middlewares/authMiddleware.js' ;
+import { authMiddleWare, authorize } from '../middlewares/authMiddleware.js' ;
 import { createComplaint,patchComplaint, commentOnComplaint, deleteComplaint, deleteComment ,
 resolveComplaint, escalateComplaint, getMyComplaints, getAllComplaints,getAllComplaintsAdmin,
 seeComments} from '../controllers/complaint.controller.js';
@@ -29,10 +29,10 @@ router.get('/comment/:complaintId',AdminauthMiddleWare,seeComments) ;
 router.delete("/delete/:complaintId", authMiddleWare, deleteComplaint) ;
 
 // Resolve a complaint
-router.put('/resolve/:complaintId',authMiddleWare, resolveComplaint) ; 
+router.put('/resolve/:complaintId',AdminauthMiddleWare, authorize('warden'),resolveComplaint) ; 
 
 // Route to escalate a complaint
-router.put("/escalate/:complaintId", AdminauthMiddleWare ,escalateComplaint) ;
+router.put("/escalate/:complaintId", AdminauthMiddleWare ,authorize('warden'),escalateComplaint) ;
 
 //router.put('/:id/resolve',authMiddleWare, resolveComplaint) ; 
 router.get("/",AdminauthMiddleWare,getAllComplaintsAdmin);

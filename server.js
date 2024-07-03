@@ -40,7 +40,8 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 // Middleware for parsing cookies and JSON bodies
 const allowedOrigins = [
   'https://6684e2a5efca7e9121ec78fa--effortless-crostata-7b9947.netlify.app',
-  'http://localhost:3000' // Add any other origins you want to allow
+  'http://localhost:3000', // Add any other origins you want to allow
+  'https://frontend-mess-portal.vercel.app'
 ];
 
 const corsOptions = {

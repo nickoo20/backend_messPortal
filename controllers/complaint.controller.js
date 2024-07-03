@@ -26,7 +26,6 @@ export const createComplaint = async (req, res) => {
     });
   }
 };
-
 // Comment on a complaint
 export const commentOnComplaint = async (req, res) => {
   try {
@@ -174,14 +173,6 @@ export const getMyComplaints = async (req, res, next) => {
 // Get All complaints
 export const getAllComplaints = async (req, res) => {
   try {
-    // Ensure req.user is defined
-    if (!req.user) {
-      return res.status(403).json({
-        success: false,
-        message: "User information is missing in the request.",
-      });
-    }
-
     // Fetch all complaints sorted by createdAt in descending order and populate createdBy and comments.user fields
     const complaints = await Complaint.find({})
       .sort({ createdAt: -1 })
@@ -196,7 +187,6 @@ export const getAllComplaints = async (req, res) => {
 
     // Log complaints to verify if `createdBy` is populated correctly
     console.log(complaints);
-
     // Filter complaints with status "pending" or "escalated" and match hostelName with req.user.hostelName
     const filteredComplaints = complaints.filter(
       (complaint) =>
@@ -259,6 +249,7 @@ export const resolveComplaint = async (req, res) => {
   
   }
 }
+
 export const getAllComplaintsAdmin=async(req,res)=>{
          try{
         const comp = await Complaint.find({})
@@ -279,9 +270,9 @@ export const getAllComplaintsAdmin=async(req,res)=>{
         });
     }catch(err){
         console.log(err);
-    }
-      
+    }   
 }
+
 export const patchComplaint=async(req,res)=>{
     const { id } = req.params;
   const { status } = req.body;
