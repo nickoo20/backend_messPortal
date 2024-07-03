@@ -38,6 +38,23 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 // }));
 
 // Middleware for parsing cookies and JSON bodies
+const allowedOrigins = [
+  'https://6684e2a5efca7e9121ec78fa--effortless-crostata-7b9947.netlify.app',
+  'http://localhost:3000' // Add any other origins you want to allow
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+};
+
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
