@@ -32,10 +32,10 @@ const app = express();
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Enable CORS for requests from the frontend development server
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: 'http://localhost:3000',
+//   credentials: true,
+// }));
 
 // Middleware for parsing cookies and JSON bodies
 app.use(cookieParser());
