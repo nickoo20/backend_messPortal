@@ -62,10 +62,10 @@ app.use('/api/students', studentsRoutes);
 app.use('/api/toggle-hostel-change', hostelchangeRoutes);
 
 // Serve frontend in production
-  app.use(express.static(path.join(dirPath, "/frontend/dist")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(dirPath, "frontend/dist",  "index.html"));
-  });
+  // app.use(express.static(path.join(dirPath, "/frontend/dist")));
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.resolve(dirPath, "frontend/dist",  "index.html"));
+  // });
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
